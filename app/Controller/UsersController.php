@@ -44,14 +44,14 @@
                 if ($this->request->data) {
                     $query = $this->User->addData($this->request->data);
                     if ($query === "success") {
-                        $this->Session->setFlash($query);
+                        $this->Flash->success($query);
                         return $this->redirect(array('action' => 'index'));
                     } else {
-                        $this->Session->setFlash($query);
+                        $this->Flash->error($query);
                     }
                 
                 } else {
-                    $this->Session->setFlash("Missing field");
+                    $this->Flash->error("Missing field");
                 }
             }
         }
@@ -64,10 +64,10 @@
             if ($this->request->is('post') || $this->request->is('put')) {
                 $query = $this->User->editData($id, $this->request->data);
                 if ($query) {
-                    $this->Session->success(__('The user has been saved'));
+                    $this->Flash->success(__('The user has been saved'));
                     return $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->error(
+                    $this->Flash->error(
                         __('The user could not be saved. Please, try again.')
                     );
                 }

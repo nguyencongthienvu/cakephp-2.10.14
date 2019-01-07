@@ -35,6 +35,7 @@ Configure::load('app_config');
 class AppController extends Controller {
     public $components = array(
         'Session',
+        'Flash',
         'Auth' => array(
             'authenticate' => array(
                 'Form' => array(

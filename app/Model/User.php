@@ -5,14 +5,14 @@ App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
         public $validate = array(
             'email' => array(
                 'required' => array(
-                    'rule' => 'notEmpty',
+                    'rule' => 'notBlank',
                     'message' => 'A username is required',
                     'allowEmpty' => false
                 )
             ),
             'password' => array(
                 'required' => array(
-                    'rule' => 'notEmpty',
+                    'rule' => 'notBlank',
                     'message' => 'A password is required',
                     'allowEmpty' => false
                 )
