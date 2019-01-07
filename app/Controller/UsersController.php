@@ -56,6 +56,10 @@
             }
         }
 
+        public function myfunc() {
+           echo "Test";
+        }
+
         public function edit($id) {
             if (!$this->User->exists($id)) {
                 throw new NotFoundException(__('Invalid user'));

@@ -26,6 +26,9 @@
     margin-right: auto;
     width: 20%;
 }
+.defaultleft {
+    float:left;
+}
 
 .default {
     float:right;
@@ -33,4 +36,12 @@
 
 .default img {
     width: 60%;
+}
+
+.resizeButton { 
+    width:25%; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
 }

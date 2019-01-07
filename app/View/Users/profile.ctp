@@ -7,3 +7,4 @@
 <div class="contain-image">
     <img class="image" src= <?php echo $user_profile['User']['picture_url']; ?> alt="CakePHP" />
 </div>
+<input class="resizeButton" type="button" title="Click to Deactivate" value="Edit Profile" onClick="javascipt:window.location.href='<?php echo $this->Html->url(array('controller'=>'users','action'=>'myfunc')) ?>'" >
