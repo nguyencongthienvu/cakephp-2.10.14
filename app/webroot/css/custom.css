@@ -1,0 +1,21 @@
+.menu1 a {
+    color: red;
+}
+
+.menu2 a {
+    color: green;
+}
+
+.menu3 a {
+    color: blue;
+}
+
+.menu1 a:hover {
+	color: #fff;
+	background: blueviolet;
+	text-decoration: underline;
+}
+
+.menuPage a {
+    margin-right: 10px;
+}
