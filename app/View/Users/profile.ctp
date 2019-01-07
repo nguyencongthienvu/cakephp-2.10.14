@@ -4,4 +4,6 @@
         echo "Admin";
     }
 ?></h1>
-<img class="image" src= <?php echo $user_profile['User']['picture_url']; ?> alt="CakePHP" />
+<div class="contain-image">
+    <img class="image" src= <?php echo $user_profile['User']['picture_url']; ?> alt="CakePHP" />
+</div>

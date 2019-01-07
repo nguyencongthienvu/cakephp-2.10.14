@@ -119,6 +119,7 @@ App::uses('Controller', 'Controller');
             if ($this->Auth->login()) {
               $this->Session->write("Token", "Tokens");
               $this->Session->write("Id", $data_user['AuthLogin']['id']);
+              $this->Session->write("Image", $data_user['AuthLogin']['picture_url']);
               return $this->redirect($this->Auth->redirectUrl());
             }
           } else {

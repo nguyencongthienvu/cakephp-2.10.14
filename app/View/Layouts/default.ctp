@@ -38,10 +38,25 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <body>
 	<div id="container">
 		<div id="header">
-		<h1><?php echo $this->Html->link($cakeDescription, 'https://cakephp.org'); ?>
-			<?php if ($this->Session->check('Auth.User')) { ?>
-			<span style="float:right;"><?php echo $this->Html->link("Đăng Xuất",array('controller' => 'users','action'=>'logout'))?></span>
-			<?php } ?></h1>
+		<h1><?php echo $this->Html->link($cakeDescription, array(
+								'controller' => 'HomePage',
+								'action' => 'display',
+								'home')); ?>
+		<?php if ($this->Session->check('Auth.User')) { ?>
+			<span class="default"><?php echo $this->Html->link("Đăng Xuất",array('controller' => 'users','action'=>'logout'))?></span>
+			<?php } ?>
+		<?php if ($this->Session->check('Image')) { ?>
+			<span class="default"><?php echo $this->Html->image($this->Session->read('Image'), 
+     			array(
+					"alt" => "logo",
+					'url' => array(
+								'controller' => 'users',
+								'action' => 'profile'
+					)
+     			));?>
+			</span>
+		<?php } ?>
+	</h1>
 		</div>
 		<div id="content">
 
