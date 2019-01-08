@@ -17,6 +17,20 @@ App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
                     'allowEmpty' => false
                 )
             ),
+            'current_password' => array(
+                'required' => array(
+                    'rule' => 'notBlank',
+                    'message' => 'A current password is required',
+                    'allowEmpty' => false
+                )
+            ),
+            'confirm_password' => array(
+                'required' => array(
+                    'rule' => 'notBlank',
+                    'message' => 'A confirm password is required',
+                    'allowEmpty' => false
+                )
+            ),
             'role' => array(
                 'valid' => array(
                     'rule' => array('inList', array('0', '1')),
@@ -50,6 +64,19 @@ App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
         public function getDataById($id) {
             if ($id) {
                 return $this->findById($id);
+            }
+        }
+
+        public function findDataByPassword($id, $data) {
+            $passHash = new SimplePasswordHasher(array('hashType' => 'sha1'));
+            $data['User']['current_password'] = $passHash->hash($data['User']['current_password']);
+            $query = $this->find('first', array(
+                'conditions' => array('id' => $id, 'password' => $data['User']['current_password'])
+            ));
+            if (!$query) {
+                return false;
+            } else {
+                return true;
             }
         }
 

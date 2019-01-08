@@ -1,5 +1,6 @@
 <div class="users form">
 <?php echo $this->Flash->render("auth"); ?>
+<?php echo $this->Session->flash("authlogin"); ?>
 <?php echo $this->Form->create('AuthLogin'); ?>
     <fieldset>
         <legend>

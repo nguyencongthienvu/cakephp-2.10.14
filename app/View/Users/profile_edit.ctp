@@ -10,8 +10,9 @@
 <?php } else { ?>
     <fieldset>
         <legend><?php echo __('Edit Password'); ?></legend>
-        <?php echo $this->Form->input('password');
-    ?>
+        <?php echo $this->Form->input('current_password',array('type' => 'password')); ?>
+        <?php echo $this->Form->input('password'); ?>
+        <?php echo $this->Form->input('confirm_password',array('type' => 'password')); ?>
     </fieldset>
 <?php } ?>
 <?php echo $this->Form->end(__('Submit')); ?>

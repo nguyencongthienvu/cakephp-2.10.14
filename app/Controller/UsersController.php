@@ -60,21 +60,48 @@
            if (!$this->User->exists($id)) {
               throw new NotFoundException('Invalid User');
            }
-
-           if ($this->request->is('post') || $this->request->is('put')) {
-                $query = $this->User->editData($id, $this->request->data);
-                if ($query) {
-                    $this->Flash->success(__('The user has been saved'));
-                    return $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Flash->error(
-                        __('The user could not be saved. Please, try again.')
-                    );
+           switch ($this->request->pass[0]) {
+               case 'password': 
+                    if ($this->request->is('post') || $this->request->is('put')) {
+                        $find = $this->User->findDataByPassword($id, $this->request->data);
+                        if (!$find) {
+                        $this->Flash->error('Current Password Wrong. Please check again !');
+                        }
+        
+                        if ($this->request->data['User']['confirm_password'] !== $this->request->data['User']['password']) {
+                        $this->Flash->error('Password Different With Confirm Password. Please Check Again !');
+                        }
+        
+                        if ($find && $this->request->data['User']['confirm_password'] === $this->request->data['User']['password']) {
+                        $query = $this->User->editData($id, $this->request->data['User']);
+                        if ($query) {
+                            $this->Flash->success(__('The user has been saved'));
+                            return $this->redirect(array('action' => 'profile'));
+                        } else {
+                            $this->Flash->error(
+                                __('The user could not be saved. Please, try again.')
+                            );
+                        }
+                    }
                 }
+                break;
+            case 'profile' : 
+                if ($this->request->is('post') || $this->request->is('put')) {
+                    $query = $this->User->editData($id, $this->request->data);
+                    if ($query) {
+                        $this->Flash->success(__('The user has been saved'));
+                        return $this->redirect(array('action' => 'profile'));
+                    } else {
+                        $this->Flash->error(
+                            __('The user could not be saved. Please, try again.')
+                        );
+                    }
             } else {
                 $this->request->data = $this->User->findById($id);
                 $this->set("user_profile", $this->request->data);
             }
+            break;
+           }
         }
 
         public function edit($id) {
