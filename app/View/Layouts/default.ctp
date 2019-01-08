@@ -38,35 +38,46 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <body>
 	<div id="container">
 		<div id="header">
-		<h1>
-		<span><h1 class="defaultleft"><?php echo $this->Html->link($cakeDescription, array(
+			<ul>
+			<?php if ($this->Session->check('Auth.User')) { ?>
+				<li class="forLi"><?php echo $this->Html->link('Home', array(
 								'controller' => 'HomePage',
 								'action' => 'display',
-								'home')); ?></h1></span>	
-			<?php if ($this->Session->check('Auth.User')) { ?>
-		<span><h1 class="defaultleft"><?php echo $this->Html->link("Trang San Pham",array('controller' => 'sanphampage','action'=>'index'))?></h1></span>
-		<span><h1 class="defaultleft"><?php echo $this->Html->link("Trang User",array('controller' => 'users','action'=>'index'))?></h1></span>	
-		<span><h1 class="defaultleft"><?php echo $this->Html->link("My Profile",array('controller' => 'users','action'=>'profile'))?></h1></span>
-			<span class="default"><?php echo $this->Html->link("Đăng Xuất",array('controller' => 'users','action'=>'logout'))?></span>
-			<?php } ?>
-		<?php if ($this->Session->check('Image')) { ?>
-			<span class="default"><?php echo $this->Html->image($this->Session->read('Image'), 
-     			array(
-					"alt" => "logo",
-					'url' => array(
-								'controller' => 'users',
-								'action' => 'profile'
-					)
-     			));?>
-			</span>
-		<?php } ?>
-	</h1>
+								'home')); ?></li>
+				<li class="dropdown forLi">
+					<a href="javascript:void(0)" class="dropbtn">Menu</a>
+					<div class="dropdown-content">
+						<?php echo $this->Html->link("Trang San Pham",array('controller' => 'sanphampage','action'=>'index'))?>
+						<?php echo $this->Html->link("Trang User",array('controller' => 'users','action'=>'index'))?>
+						<?php echo $this->Html->link("My Profile",array('controller' => 'users','action'=>'profile'))?>
+					</div>
+				</li>
+				<li class="default forLi"><?php echo $this->Html->link("Đăng Xuất",array('controller' => 'users','action'=>'logout'))?></li>
+				<li class="default forLiOfImage"><?php if ($this->Session->check('Image')) { ?>
+					<?php echo $this->Html->image($this->Session->read('Image'), 
+     					array(
+							"alt" => "logo",
+							'url' => array(
+										'controller' => 'users',
+										'action' => 'profile'
+							)
+     					));?>
+					<?php } ?>
+				</li>	
+				<?php } else { ?>
+					<li class="forLi"><?php echo $this->Html->link('Sign In', array(
+								'controller' => 'authlogin',
+								'action' => 'login'
+								)); ?></li>
+				<?php } ?>
+			</ul>
 		</div>
 		<div id="content">
 
 			<?php echo $this->Flash->render(); ?>
 
 			<?php echo $this->fetch('content'); ?>
+			<?php echo $this->element('sql_dump'); ?>
 		</div>
 		<div id="footer">
 			<?php echo $this->Html->link(
@@ -80,6 +91,5 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			</p>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>
