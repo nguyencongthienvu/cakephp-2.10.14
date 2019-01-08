@@ -1,5 +1,5 @@
 <div class="users form">
-<?php echo $this->Session->flash("authlogin"); ?>
+<?php echo $this->Flash->render("auth"); ?>
 <?php echo $this->Form->create('AuthLogin'); ?>
     <fieldset>
         <legend>
@@ -12,18 +12,19 @@
 <?php echo $this->Form->end(__('Login')); ?>
 </div>
 <div>
-<?php
-$config = Configure::read('Facebook_Login');
-$fb = new Facebook\Facebook([
-  'app_id' => $config['app-id'],
-  'app_secret' => $config['secrect'],
-  'default_graph_version' => 'v2.10',
-  ]);
+    <?php
+        $config = Configure::read('Facebook_Login');
+        $fb = new Facebook\Facebook([
+        'app_id' => $config['app-id'],
+        'app_secret' => $config['secrect'],
+        'default_graph_version' => 'v2.10',
+        ]);
 
-$helper = $fb->getRedirectLoginHelper();
+        $helper = $fb->getRedirectLoginHelper();
 
-$permissions = ['email']; // Optional permissions
-$loginUrl = $helper->getLoginUrl($config['default-link'], $permissions);
+        $permissions = ['email']; // Optional permissions
+        $loginUrl = $helper->getLoginUrl($config['default-link'], $permissions);
 
-echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
+        echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
     ?>
+</div>
