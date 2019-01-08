@@ -43,10 +43,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 								'controller' => 'HomePage',
 								'action' => 'display',
 								'home')); ?></h1></span>	
+			<?php if ($this->Session->check('Auth.User')) { ?>
 		<span><h1 class="defaultleft"><?php echo $this->Html->link("Trang San Pham",array('controller' => 'sanphampage','action'=>'index'))?></h1></span>
 		<span><h1 class="defaultleft"><?php echo $this->Html->link("Trang User",array('controller' => 'users','action'=>'index'))?></h1></span>	
 		<span><h1 class="defaultleft"><?php echo $this->Html->link("My Profile",array('controller' => 'users','action'=>'profile'))?></h1></span>
-		<?php if ($this->Session->check('Auth.User')) { ?>
 			<span class="default"><?php echo $this->Html->link("Đăng Xuất",array('controller' => 'users','action'=>'logout'))?></span>
 			<?php } ?>
 		<?php if ($this->Session->check('Image')) { ?>
