@@ -43,5 +43,25 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
+    margin-top: 1%;
 }
+@media (min-width: 1281px) {
+  
+    .imageReponsive {
+        width: 18%;
+        height: 30%;
+        margin-top: 2%;
+        position: absolute;
+    }
+    
+  }
+
+  @media (min-width: 1025px) and (max-width: 1280px) {
+  
+    .imageReponsive {
+        width: 18%;
+        height: 25%;
+        margin-top: 5%;
+    }
+    
+  }

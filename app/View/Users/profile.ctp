@@ -7,4 +7,7 @@
 <div class="contain-image">
     <img class="image" src= <?php echo $user_profile['User']['picture_url']; ?> alt="CakePHP" />
 </div>
-<input class="resizeButton" type="button" title="Click to Deactivate" value="Edit Profile" onClick="javascipt:window.location.href='<?php echo $this->Html->url(array('controller'=>'users','action'=>'myfunc')) ?>'" >
+<?php if (!isset($user_profile['User']['facebook_id'])) { ?>
+    <input class="resizeButton" type="button" title="Click to Deactivate" value="Edit Password" onClick="javascipt:window.location.href='<?php echo $this->Html->url(array('controller'=>'users','action'=>'profile_edit','password',$user_profile['User']['id'])) ?>'" >
+<?php } ?>
+    <input class="resizeButton" type="button" title="Click to Deactivate" value="Edit Profile" onClick="javascipt:window.location.href='<?php echo $this->Html->url(array('controller'=>'users','action'=>'profile_edit','profile',$user_profile['User']['id'])) ?>'" >
