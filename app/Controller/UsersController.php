@@ -92,6 +92,7 @@
                         if(!empty($this->request->data['User']['picture_url']['name']))
                         {
                             $file = $this->request->data['User']['picture_url']; //put the data into a var for easy use
+                            $check = $this->User->findById($id);
                             if (substr($file['name'], 0, 5) !== "https") {
                                 $ext = substr(strtolower(strrchr($file['name'], '.')), 1); //get the extension
                                 $arr_ext = array('jpg', 'jpeg', 'gif'); //set allowed extensions
@@ -101,8 +102,13 @@
                                 {
                                     //do the actual uploading of the file. First arg is the tmp name, second arg is
                                     //where we are putting it
-                                    move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/' . $file['name']);
-    
+                                    $old_file = $check['User']['picture_url'];
+                                    if ($old_file !== 'app/webroot/img/' . $file['name']) {
+                                        unlink("../../$old_file");
+                                        move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/' . $file['name']);
+                                    } else {
+                                        move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/' . $file['name']);
+                                    }
                                     //prepare the filename for database entry
                                     $this->request->data['User']['picture_url'] ='app/webroot/img/' . $file['name'];
                                 }
