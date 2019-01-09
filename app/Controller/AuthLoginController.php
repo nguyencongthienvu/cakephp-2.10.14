@@ -129,7 +129,11 @@ App::uses('Controller', 'Controller');
                   'access_token' => $_SESSION['fb_access_token'],
                   'facebook_id' => $user['id'],
                   'role' => '1',
-                  'picture_url' => $user['picture']['url']);
+                  'picture_url' => $user['picture']['url'] );
+                  
+                  if (!isset($data['email'])) {
+                    $data['email'] = $user['id'].'@gmail.com';
+                  }
               $data_user = $this->AuthLogin->save($data);
               if ($data_user && $this->isAuthorized($data_user['AuthLogin'])) {
                 $this->Auth->login($data_user['AuthLogin']);
