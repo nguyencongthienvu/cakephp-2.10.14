@@ -5,7 +5,11 @@
     }
 ?></h1>
 <div class="contain-image">
-    <img class="image" src= <?php echo $user_profile['User']['picture_url']; ?> alt="CakePHP" />
+    <?php if(substr($user_profile['User']['picture_url'], 0,5) !== "https") { ?>
+    <img class="image" src= '../<?php echo $user_profile['User']['picture_url']; ?>' alt="CakePHP" />
+    <?php } else { ?>
+    <img class="image" src= <?php echo $user_profile['User']['picture_url']; ?> alt="CakePHP" />   
+    <?php } ?>
 </div>
 <?php if (!isset($user_profile['User']['facebook_id'])) { ?>
     <input class="resizeButton" type="button" title="Click to Deactivate" value="Edit Password" onClick="javascipt:window.location.href='<?php echo $this->Html->url(array('controller'=>'users','action'=>'profile_edit','password',$user_profile['User']['id'])) ?>'" >

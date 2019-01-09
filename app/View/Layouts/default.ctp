@@ -52,18 +52,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 						<?php echo $this->Html->link("My Profile",array('controller' => 'users','action'=>'profile'))?>
 					</div>
 				</li>
-				<li class="default forLi"><?php echo $this->Html->link("Đăng Xuất",array('controller' => 'users','action'=>'logout'))?></li>
-				<li class="default forLiOfImage"><?php if ($this->Session->check('Image')) { ?>
-					<?php echo $this->Html->image($this->Session->read('Image'), 
-     					array(
-							"alt" => "logo",
-							'url' => array(
-										'controller' => 'users',
-										'action' => 'profile'
-							)
-     					));?>
-					<?php } ?>
-				</li>	
+				<li class="default forLi"><?php echo $this->Html->link("Đăng Xuất",array('controller' => 'users','action'=>'logout'))?></li>	
 				<?php } else { ?>
 					<li class="forLi"><?php echo $this->Html->link('Sign In', array(
 								'controller' => 'authlogin',
