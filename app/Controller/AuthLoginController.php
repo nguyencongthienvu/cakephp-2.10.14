@@ -1,5 +1,6 @@
 <?php
 App::uses('Controller', 'Controller');
+use \Firebase\JWT\JWT;
     class AuthLoginController extends AppController {
         var  $helpers = array('Html', 'Form', 'Session');
 
@@ -16,8 +17,14 @@ App::uses('Controller', 'Controller');
                       if ($this->isAuthorized($query['AuthLogin'])) {
                         $this->Auth->login($data['AuthLogin']);
                         if ($this->Auth->login()) {
-                          $this->Session->write("Token", "Tokens");
+                          $user = $this->Auth->user();
+                          $token = JWT::encode($user, Configure::read('Security.salt'));
                           $this->Session->write("Id",$query['AuthLogin']['id']);
+                          $id = $query['AuthLogin']['id'];
+                          $token_data = array("access_token" => $token);
+                          if($this->AuthLogin->editData($query['AuthLogin']['id'], $token_data) === "Edited success") {
+                            $this->Session->write("Token", $token);
+                          }                         
                           return $this->redirect($this->Auth->redirectUrl());
                         } else {
                           echo $this->Session->setFlash('Cant log in please check your internet or try again.'
@@ -112,12 +119,14 @@ App::uses('Controller', 'Controller');
             exit;
           }
           $user = $response->getGraphUser();
-          $this->Session->write("Token", "Tokens");
-          $data_user = $this->AuthLogin->getDataByFacebookId($user['id'], $_SESSION['fb_access_token']);
+          if ($_SESSION['fb_access_token']) {
+            $token = JWT::encode($user, Configure::read('Security.salt'));
+          }
+          $data_user = $this->AuthLogin->getDataByFacebookId($user['id'], $token);
           if ($data_user && $this->isAuthorized($data_user['AuthLogin'])) {
             $this->Auth->login($data_user['AuthLogin']);
             if ($this->Auth->login()) {
-              $this->Session->write("Token", "Tokens");
+              $this->Session->write("Token", $token);
               $this->Session->write("Id", $data_user['AuthLogin']['id']);
               $this->Session->write("Image", $data_user['AuthLogin']['picture_url']);
               return $this->redirect($this->Auth->redirectUrl());
@@ -126,7 +135,7 @@ App::uses('Controller', 'Controller');
               $data = array(
                   'username' => $user['name'], 
                   'email' => $user['email'],
-                  'access_token' => $_SESSION['fb_access_token'],
+                  'access_token' => $token,
                   'facebook_id' => $user['id'],
                   'role' => '1',
                   'picture_url' => $user['picture']['url'] );
@@ -139,7 +148,7 @@ App::uses('Controller', 'Controller');
                 $this->Auth->login($data_user['AuthLogin']);
                 if ($this->Auth->login()) {
                   $this->Session->write("Id", $data_user['AuthLogin']['id']);
-                  $this->Session->write("Token", "Token");
+                  $this->Session->write("Token", $token);
                   return $this->redirect($this->Auth->redirectUrl());
                 }
               } 
