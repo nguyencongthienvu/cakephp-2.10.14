@@ -26,11 +26,11 @@
     margin-right: auto;
     width: 20%;
 }
-.defaultleft {
+.menu-content .defaultleft {
     float:left;
 }
 
-.default {
+.menu-content .default {
     float:right;
 }
 
@@ -38,14 +38,14 @@
     width: 60%;
 }
 
-.forLi {
+.menu-content .forLi {
     margin-top: 0.3%;
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 0;
 }
 
-.forLiOfImage {
+.menu-content .forLiOfImage {
     margin: 0;
 }
 
@@ -78,7 +78,7 @@
   }
 
 
-  ul {
+  .menu-content {
 	list-style-type: none;
 	margin: 0;
     padding: 0;
@@ -86,26 +86,26 @@
     background-color: #333;
   }
   
-  li {
+  .menu-content li {
 	float: left;
   }
   
-  li a, .dropbtn {
+  .menu-content li a, .dropbtn {
 	display: inline-block;
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
   }
   
-  li a:hover, .dropdown:hover .dropbtn {
+  .menu-content li a:hover, .dropdown:hover .dropbtn {
 	background-color: red;
   }
   
-  li.dropdown {
+  .menu-content li.dropdown {
 	display: inline-block;
   }
   
-  .dropdown-content {
+  .menu-content .dropdown-content {
 	display: none;
 	position: absolute;
 	background-color: #003d4c;
@@ -114,7 +114,7 @@
 	z-index: 1;
   }
   
-  .dropdown-content a {
+  .menu-content .dropdown-content a {
 	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
@@ -122,8 +122,66 @@
 	text-align: left;
   }
   
-  .dropdown-content a:hover {background-color: gray}
+  .menu-content .dropdown-content a:hover {background-color: gray}
   
-  .dropdown:hover .dropdown-content {
+  .menu-content .dropdown:hover .dropdown-content {
 	display: block;
+  }
+
+  .item-content {
+    width:100%;
+    margin: 0 auto;
+    overflow: auto;
+  
+  }
+
+  .card {
+    list-style-type: none;
+    
+  }
+
+  .card-child {
+    display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-family: arial;
+    width: 30%;
+    /* overflow-x: auto; */
+    max-height: 30%;
+    height: 30%;
+    overflow-wrap: break-word;
+  word-wrap: break-word;
+
+
+    /* overflow:hidden; */
+    float: left;
+    margin: 10px;
+   border: 5px solid #fff;
+ 
+  -webkit-transition: box-shadow 0.5s ease;
+  -moz-transition: box-shadow 0.5s ease;
+  -o-transition: box-shadow 0.5s ease;
+  -ms-transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+  }
+  
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+  
+  .card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card button:hover {
+    opacity: 0.7;
   }

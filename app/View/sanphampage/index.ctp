@@ -4,6 +4,8 @@
     <tr>
         <th>Id</th>
         <th>Title</th>
+        <th>Price</th>
+        <th>Image</th>
         <th>Created</th>
         <th>Modified</th>
         <th>Other</th>
@@ -20,6 +22,8 @@
             <?php echo $this->Html->link($post['sanphampage']['title'],
 array('controller' => 'sanphampage', 'action' => 'detail', $post['sanphampage']['id'])); ?>
         </td>
+        <td><?php echo $post['sanphampage']['price']; ?></td>
+        <td><?php echo $post['sanphampage']['image']; ?></td>
         <td><?php echo $post['sanphampage']['created']; ?></td>
         <td><?php echo $post['sanphampage']['modified']; ?></td>
         <td><?php

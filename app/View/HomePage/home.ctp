@@ -1,4 +1,18 @@
-<h1 style="text-align:center">Menu</h1>
-<h1 class="menu1"><?php echo $this->Html->link("Trang San Pham",array('controller' => 'sanphampage','action'=>'index'))?></h1>
-<h1 class="menu2"><?php echo $this->Html->link("Trang User",array('controller' => 'users','action'=>'index'))?></h1>
-<h1 class="menu3"><?php echo $this->Html->link("My Profile",array('controller' => 'users','action'=>'profile'))?></h1>
+<h1 style="text-align:center">Hot Item</h1>
+
+<div class="item-content">
+<div class="card">
+<?php foreach ($posts_home as $post): ?>
+  <div class="card-child">
+    <img src="app/webroot/img/default.png" alt="Denim Jeans" style="width:100%">
+    <h1><?php echo $post['sanphampage']['title']; ?></h1>
+    <p class="price"><?php echo $post['sanphampage']['price']; ?> VND</p>
+    <p style="min-height:70px;"><?php echo substr($post['sanphampage']['body'],0,233); ?></p>
+    <p><?php
+            echo $this->Html->link($this->Form->button('Detail'), array('controller' => 'sanphampage','action'=> 'detail',$post['sanphampage']['id']), array('escape'=>false,'title' => "Click to view somethin"))
+    ?></p>
+  </div>
+  <?php endforeach; ?>
+  <?php unset($post); ?>
+</div>
+</div>

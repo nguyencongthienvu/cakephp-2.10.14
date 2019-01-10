@@ -1,6 +1,22 @@
 <?php 
     class sanphampage extends AppModel {
         public $useTable = "postviews";
+        public $validate = array(
+            'title' => array(
+                'required' => array(
+                    'rule' => 'notBlank',
+                    'message' => 'A username is required',
+                    'allowEmpty' => false
+                )
+            ),
+            'price' => array(
+                'required' => array(
+                    'rule' => 'notBlank',
+                    'message' => 'A current password is required',
+                    'allowEmpty' => false
+                )
+            )
+        );
         public function getData() {
             return $this->find('all');
         }
