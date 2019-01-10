@@ -38,7 +38,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <body>
 	<div id="container">
 		<div id="header">
-			<ul>
+			<ul class="menu-content">
 			<?php if ($this->Session->check('Auth.User')) { ?>
 				<li class="forLi"><?php echo $this->Html->link('Home', array(
 								'controller' => 'HomePage',

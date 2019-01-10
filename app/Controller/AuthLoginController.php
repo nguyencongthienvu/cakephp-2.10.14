@@ -22,10 +22,11 @@ use \Firebase\JWT\JWT;
                           $this->Session->write("Id",$query['AuthLogin']['id']);
                           $id = $query['AuthLogin']['id'];
                           $token_data = array("access_token" => $token);
-                          if($this->AuthLogin->editData($query['AuthLogin']['id'], $token_data) === "Edited success") {
+                          if($this->AuthLogin->editData($query['AuthLogin']['id'], $token_data) === "Edited success.") {
                             $this->Session->write("Token", $token);
+                            return $this->redirect($this->Auth->redirectUrl());
                           }                         
-                          return $this->redirect($this->Auth->redirectUrl());
+                          
                         } else {
                           echo $this->Session->setFlash('Cant log in please check your internet or try again.'
                         ,'default',array(),'authlogin');
