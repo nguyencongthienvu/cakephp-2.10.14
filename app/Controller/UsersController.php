@@ -103,14 +103,14 @@
                                     //do the actual uploading of the file. First arg is the tmp name, second arg is
                                     //where we are putting it
                                     $old_file = $check['User']['picture_url'];
-                                    if ($old_file !== 'app/webroot/img/' . $file['name']) {
+                                    if (isset($old_file) && $old_file !== 'app/webroot/img/' . $file['name']) {
                                         unlink("../../$old_file");
-                                        move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/' . $file['name']);
+                                        move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/' . $file['name'] .'-'. $id);
                                     } else {
-                                        move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/' . $file['name']);
+                                        move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/' . $file['name'] .'-'. $id);
                                     }
                                     //prepare the filename for database entry
-                                    $this->request->data['User']['picture_url'] ='app/webroot/img/' . $file['name'];
+                                    $this->request->data['User']['picture_url'] ='app/webroot/img/' . $file['name'].'-'. $id;
                                 }
 
                                 $query = $this->User->editData($id, $this->request->data);
